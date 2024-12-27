@@ -10,6 +10,8 @@ module.exports = {
   test: {
     client: 'postgresql',
     connection: {
+      host: process.env.PGHOST,
+      port: process.env.PGPORT,
       database: process.env.PGDATABASE,
       user:     process.env.PGUSER,
       password: process.env.PGPASSWORD
@@ -26,16 +28,20 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
+      host: process.env.PGHOST,
+      port: process.env.PGPORT,
       database: process.env.PGDATABASE,
       user:     process.env.PGUSER,
       password: process.env.PGPASSWORD
     },
     pool: {
       min: 2,
-      max: 10
+      max: 20,
+      idleTimeoutMillis: 600000,
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: 'knex_migrations',
+      directory: './migrations'
     }
   },
 
