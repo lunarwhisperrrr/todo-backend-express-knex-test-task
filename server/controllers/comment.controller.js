@@ -1,4 +1,4 @@
-const { addComment, getComment } = require("../database/comment-queries");
+const { addComment, getComment, getAllCommentsForTodo } = require("../database/comment-queries");
 const { addErrorReporting } = require("../utils/error");
 
 exports.addComment = addErrorReporting(async (req, res) => {
@@ -16,6 +16,14 @@ exports.getComment = addErrorReporting(async (req, res) => {
   const { comment_id } = req.params;
   const data = await getComment(comment_id);
   return res.status(200).json({
-    data
-  })
+    data,
+  });
+}, "Interal Server Error");
+
+exports.getAllComments = addErrorReporting(async (req, res) => {
+  const { todo_id } = req.params;
+  const data = await getAllCommentsForTodo(todo_id);
+  return res.status(200).json({
+    data,
+  });
 }, "Interal Server Error");
