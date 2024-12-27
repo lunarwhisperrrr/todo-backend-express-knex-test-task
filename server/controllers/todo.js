@@ -5,9 +5,15 @@ const { addErrorReporting } = require("../utils/error");
 function createToDo(req, data) {
   const protocol = req.protocol,
     host = req.get("host"),
-    id = data.id;
+    id = data.todo_id;
 
   return {
+    id: data.todo_id,
+    description: data.description,
+    creator: {
+      name: data.username,
+      email: data.email,
+    },
     title: data.title,
     order: data.order,
     completed: data.completed || false,
@@ -17,6 +23,7 @@ function createToDo(req, data) {
 
 async function getAllTodos(req, res) {
   const allEntries = await todos.all();
+  console.log(allEntries);
   return res.send(allEntries.map(_.curry(createToDo)(req)));
 }
 
@@ -26,7 +33,7 @@ async function getTodo(req, res) {
 }
 
 async function postTodo(req, res) {
-  const created = await todos.create(req.body.title, req.body.order);
+  const created = await todos.create(req.body.title, req.body.order, req.body.description, req.user.id);
   return res.send(createToDo(req, created));
 }
 
