@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "heroku-postbuild": "cd server && npx knex migrate:latest",
-    "client": "cd client && yarn start",
+    "client": "cd client && NODE_OPTIONS=--openssl-legacy-provider yarn start",
     "server": "cd server && nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "test": "cd server && jest",
