@@ -4,8 +4,8 @@ const https = require("https");
 const fs = require("fs");
 const bodyParser = require("body-parser");
 
+const authRouter = require("./routes/auth");
 const todoRouter = require("./routes/todo");
-
 const app = express();
 
 app.use(bodyParser.json());
@@ -14,6 +14,7 @@ app.use(
     extended: true,
   })
 );
+app.use("/auth", authRouter);
 app.use("/todo", todoRouter);
 
 app.use(function (req, res, next) {
