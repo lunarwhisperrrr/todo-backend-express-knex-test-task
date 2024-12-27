@@ -67,3 +67,8 @@ Bonus features include a simple frontend boostrapped with create-react-app and t
     > Note: The proxied connection will only work locally.
     > You'll need the server to serve the frontend build if
     > you want to host the entire project somewhere.
+
+
+## Testing
+You should consider writing unit and integration tests for your application. For automated testing, consider using a framework like Jest, Mocha, or Chai.
+Use this postman collection: [luna](https://app.getpostman.com/join-team?invite_code=b8ba3670882dd5e60346ea26d76c0398f54849ee5674801e288b5deaa8aa13c6)
