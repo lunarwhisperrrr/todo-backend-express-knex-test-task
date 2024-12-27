@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 
 const authRouter = require("./routes/auth");
 const todoRouter = require("./routes/todo");
+const commentsRouters = require('./routes/comment');
+
 const morgan = require("morgan");
 const app = express();
 
@@ -17,7 +19,8 @@ app.use(
 );
 app.use(morgan('dev'));
 app.use("/auth", authRouter);
-app.use("/todo", todoRouter);
+app.use("/todos", todoRouter);
+app.use('/comments', commentsRouters);
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Headers", "Content-Type");

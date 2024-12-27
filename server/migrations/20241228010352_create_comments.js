@@ -2,7 +2,7 @@ exports.up = function (knex) {
     return knex.schema.createTable("comments", function (table) {
       table.increments("id").primary();
       table
-        .integer("task_id")
+        .integer("todo_id")
         .unsigned()
         .references("id")
         .inTable("todos")
@@ -15,6 +15,7 @@ exports.up = function (knex) {
         .onDelete("CASCADE");
       table.text("content").notNullable();
       table.timestamp("created_at").defaultTo(knex.fn.now());
+      table.timestamp("updated_at").defaultTo(knex.fn.now());
     });
   };
   
