@@ -33,7 +33,12 @@ async function getTodo(req, res) {
 }
 
 async function postTodo(req, res) {
-  const created = await todos.create(req.body.title, req.body.order, req.body.description, req.user.id);
+  const created = await todos.create(
+    req.body.title,
+    req.body.order,
+    req.body.description,
+    req.user.id
+  );
   return res.send(createToDo(req, created));
 }
 
@@ -48,7 +53,13 @@ async function deleteAllTodos(req, res) {
 }
 
 async function deleteTodo(req, res) {
-  const deleted = await todos.delete(req.params.id);
+  // Check if user is the creator
+  const { id } = req.params;
+  const record = await todos.get(id);
+  if (!record) throw new Error("No record with that id");
+  if (record.user_id !== req.user.id)
+    throw new Error("User cannot delete that todo");
+  const deleted = await todos.delete(id);
   return res.send(createToDo(req, deleted));
 }
 
