@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 const authRouter = require("./routes/auth");
 const todoRouter = require("./routes/todo");
+const morgan = require("morgan");
 const app = express();
 
 app.use(bodyParser.json());
@@ -14,6 +15,7 @@ app.use(
     extended: true,
   })
 );
+app.use(morgan('dev'));
 app.use("/auth", authRouter);
 app.use("/todo", todoRouter);
 

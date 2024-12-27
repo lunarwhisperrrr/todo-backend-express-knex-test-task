@@ -25,6 +25,7 @@
     "supertest": "^4.0.2"
   },
   "devDependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "morgan": "^1.10.0"
   }
 }
